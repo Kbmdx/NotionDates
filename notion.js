@@ -1,12 +1,14 @@
-const { Client } = require("@notionhq/client");
+const { Client, LogLevel } = require("@notionhq/client");
 
-const notion = new Client({ auth: process.env.NOTION_API_KEY });
+const notion = new Client({ auth: process.env.NOTION_API_KEY, logLevel: LogLevel.DEBUG });
 
 async function getDatabase() {
+
+    const databaseId = process.env.NOTION_DATABASE_ID;
+console.log({databaseId});
   const response = await notion.databases.retrieve({
-    datebase_id: process.env.NOTION_DATABASE_ID,
+        database_id: databaseId,
   })
   console.log(response);
 }
-
 getDatabase();
